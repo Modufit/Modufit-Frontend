@@ -1,0 +1,99 @@
+<link rel="stylesheet" href="/src/styles/main.css">
+
+<div class="facility-content-wrapper">
+    <!-- 검색 영역 -->
+    <div class="search-bar-container">
+        <input type="text" placeholder="검색어를 입력하세요..." class="search-input">
+        <button class="search-button">검색</button>
+    </div>
+
+    <!-- 필터 / 정렬 영역 -->
+    <div class="controls-container">
+        <button class="filter-button">필터 ▼</button>
+
+        <select class="sort-select">
+            <option value="">정렬 선택</option>
+            <option value="name">이름순</option>
+            <option value="location">위치순</option>
+            <option value="sport">운동 종목순</option>
+        </select>
+    </div>
+
+    <!-- 시설명 -->
+    <div class="section-title">시설명</div>
+    <div class="facility-list">
+        <div class="facility-card">
+            <div class="facility-name">헬스장 A</div>
+            <div class="facility-type">유형: 실내</div>
+            <div class="facility-location">위치: 강남구</div>
+            <div class="facility-sport">종목: 헬스</div>
+        </div>
+
+        <div class="facility-card">
+            <div class="facility-name">체육관 B</div>
+            <div class="facility-type">유형: 실내</div>
+            <div class="facility-location">위치: 서초구</div>
+            <div class="facility-sport">종목: 농구</div>
+        </div>
+    </div>
+
+    <button class="more-button">더보기</button>
+
+    <hr class="section-divider">
+
+    <!-- 프로그램명 -->
+    <div class="section-title">프로그램명</div>
+    <div class="program-list">
+        <div class="program-item">
+            <div class="program-row"><strong>담당 시설:</strong> 헬스장 A</div>
+            <div class="program-row"><strong>프로그램명:</strong> PT 클래스</div>
+            <div class="program-row"><strong>운동 종목:</strong> 헬스</div>
+            <div class="program-row"><strong>운동 대상:</strong> 성인</div>
+            <div class="program-row"><strong>수업 날짜:</strong> 매주 월/수/금</div>
+            <div class="program-row"><strong>수업 시간:</strong> 18:00 ~ 19:00</div>
+            <div class="program-row"><strong>가격:</strong> 150,000원</div>
+        </div>
+
+        <div class="program-item">
+            <div class="program-row"><strong>담당 시설:</strong> 체육관 B</div>
+            <div class="program-row"><strong>프로그램명:</strong> 농구 교실</div>
+            <div class="program-row"><strong>운동 종목:</strong> 농구</div>
+            <div class="program-row"><strong>운동 대상:</strong> 청소년</div>
+            <div class="program-row"><strong>수업 날짜:</strong> 매주 토요일</div>
+            <div class="program-row"><strong>수업 시간:</strong> 10:00 ~ 12:00</div>
+            <div class="program-row"><strong>가격:</strong> 80,000원</div>
+        </div>
+    </div>
+
+    <button class="more-button">더보기</button>
+
+    <hr class="section-divider">
+
+    <!-- 시설 대여 -->
+    <div class="section-title">시설대여</div>
+    <div class="schedule-list">
+        <div class="schedule-item">
+            <div class="schedule-row"><strong>시설 이름:</strong> 체육관 B</div>
+            <div class="schedule-row"><strong>예약 날짜:</strong> 2025-03-10</div>
+            <div class="schedule-row"><strong>이용 시간:</strong> 14:00 ~ 16:00</div>
+            <div class="schedule-row"><strong>참여 인원:</strong> 8 / 20 (최소 4명)</div>
+        </div>
+
+        <div class="schedule-item">
+            <div class="schedule-row"><strong>시설 이름:</strong> 헬스장 A</div>
+            <div class="schedule-row"><strong>예약 날짜:</strong> 2025-03-12</div>
+            <div class="schedule-row"><strong>이용 시간:</strong> 09:00 ~ 11:00</div>
+            <div class="schedule-row"><strong>참여 인원:</strong> 3 / 10 (최소 2명)</div>
+        </div>
+    </div>
+
+    <button class="more-button">더보기</button>
+</div>
+
+<script src="/src/facility-view.js"></script> 
+<script>
+    // facility-view.js 파일이 성공적으로 로드된 후, 정의된 초기화 함수를 호출합니다.
+    // fetch 방식으로 HTML을 삽입하면 DOMContentLoaded 이벤트가 발생하지 않으므로, 
+    // 파일 로드 후 즉시 함수를 호출하는 것이 일반적입니다.
+    initializeFacilityView(); 
+</script>

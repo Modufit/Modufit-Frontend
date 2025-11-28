@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modufit - 공공시설 예약 챗봇</title>
+    <link rel="stylesheet" href="/src/styles/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div id="app-container">
+        <header id="header">
+            <div class="logo">Modufit</div>
+            <button class="logout-btn">Logout</button>
+        </header>
+
+        <div id="main-content">
+            <aside id="sidebar">
+                <nav class="menu-section">
+                    <div class="section-title">메인 메뉴</div>
+                    <ul>
+                        <li class="menu-item active" data-id="menu-facility">시설 및 프로그램</li>
+                        <li class="menu-item" data-id="menu-reservation">내 예약</li>
+                        <li class="menu-item" data-id="menu-chat">내 채팅</li>
+                        <li class="menu-item" data-id="menu-info">내 정보</li>
+                    </ul>
+                </nav>
+
+                <nav class="chat-section">
+                    <div class="section-title">내 채팅</div>
+                    <ul>
+                        <li class="chat-item" data-chat="chat-1">채팅 1</li>
+                        <li class="chat-item" data-chat="chat-2">채팅 2</li>
+                        <li class="chat-item" data-chat="chat-3">채팅 3</li>
+                    </ul>
+                </nav>
+
+                <div class="user-info">
+                    <span class="user-icon">👤</span>
+                    <span class="username">백호돌이</span>
+                </div>
+            </aside>
+
+            <main id="main-area">
+            </main>
+        </div>
+    </div>
+    <script src="/src/index.js"></script>
+</body>
+</html>
