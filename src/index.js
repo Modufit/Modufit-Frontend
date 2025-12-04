@@ -6,15 +6,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ⭐ 공통: 외부 파일 로드 함수
     function loadPage(path) {
-        fetch(path)
-            .then(res => res.text())
-            .then(html => {
-                mainArea.innerHTML = html;
-            })
-            .catch(() => {
-                mainArea.innerHTML = `<div class="error-view">파일 로드 실패: ${path}</div>`;
-            });
+    fetch(path)
+        .then(res => res.text())
+        .then(html => {
+            mainArea.innerHTML = html;
+
+            // ▽▽ 페이지별 초기화 코드 ▽▽
+            if (path.includes('main.html')) {
+                // 시설/프로그램 메인 화면 로드된 경우
+                if (typeof initializeFacilityView === 'function') {
+                    initializeFacilityView();
+                }
+            }
+            // 나중에 필요하면 다른 페이지 초기화도 여기서 분기 가능
+            // else if (path.includes('chat.html')) { initializeChatView(); } ...
+        })
+        .catch(() => {
+            mainArea.innerHTML = `<div class="error-view">파일 로드 실패: ${path}</div>`;
+        });
     }
+
 
     function showMessage(elementId, text) {
         const el = document.getElementById(elementId);
