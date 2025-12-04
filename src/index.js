@@ -16,6 +16,48 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 
+    function showMessage(elementId, text) {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+        if (!text) {
+            el.style.display = "none";
+            el.textContent = "";
+        } else {
+            el.style.display = "block";
+            el.textContent = text;
+        }
+    }
+
+    const API_BASE = "http://localhost:8080/api"; // 🔥 포트 수정 필요 시 여기에
+
+    const loginBtn = document.getElementById("login-btn");
+
+    loginBtn.addEventListener("click", () => {
+        const email = document.getElementById("login-email").value.trim();
+        const password = document.getElementById("login-password").value.trim();
+
+        fetch(`${API_BASE}/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message ?? "응답 받음");
+
+            if (data.success) {
+                localStorage.setItem("user", JSON.stringify(data.user));
+                window.location.href = "../pages/main.html";  
+            } else {
+                showMessage("login-message", data.message);
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            showMessage("login-message", "서버 연결 실패");
+        });
+    });
+
     // ⭐ 메뉴 클릭 시
     menuItems.forEach(item => {
         item.addEventListener('click', function () {

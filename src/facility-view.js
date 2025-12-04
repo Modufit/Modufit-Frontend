@@ -1,42 +1,71 @@
-// facility-view.js
-
-document.addEventListener('DOMContentLoaded', function() {
-    // 주의: 이 스크립트는 facility-view.html이 로드될 때 실행되어야 합니다.
-    // fetch 방식으로 로드할 경우, 별도의 초기화 함수를 정의해야 합니다.
-});
-
-
-/**
- * 시설 및 프로그램 뷰가 로드된 후 실행될 초기화 함수
- * (script.js에서 호출되어야 합니다.)
- */
 function initializeFacilityView() {
     console.log("Facility View Initialized!");
 
+    const API_BASE = "http://localhost:8080/api"; // 백엔드 포트에 맞게
+
     const searchInput = document.querySelector('.search-input');
     const searchButton = document.querySelector('.search-button');
-    const filterButton = document.querySelector('.filter-button');
-    
-    // 1. 검색 기능 이벤트 리스너
-    if (searchButton && searchInput) {
-        searchButton.addEventListener('click', () => {
-            alert(`시설 검색: ${searchInput.value}`);
-            // 실제로는 여기에 AJAX 호출 및 목록 업데이트 로직이 들어갑니다.
+    const facilityList = document.querySelector('.facility-list');
+
+    // 시설 카드 렌더링
+    function renderFacilities(facilities) {
+        if (!facilityList) return;
+
+        facilityList.innerHTML = "";
+
+        if (!facilities || facilities.length === 0) {
+            facilityList.innerHTML = "<div>검색 결과가 없습니다.</div>";
+            return;
+        }
+
+        facilities.forEach(f => {
+            const card = document.createElement("div");
+            card.className = "facility-card";
+
+            const name = f.facilityName ?? "시설명 없음";
+            const type = f.facilityType ?? "-";
+            const sport = f.sportType ?? "-";
+            const region = f.region ?? "-";
+            const address = f.address ?? "-";
+
+            card.innerHTML = `
+                <div class="facility-name">${name}</div>
+                <div class="facility-type">유형: ${type}</div>
+                <div class="facility-location">지역: ${region}</div>
+                <div class="facility-address">주소: ${address}</div>
+                <div class="facility-sport">종목: ${sport}</div>
+            `;
+            facilityList.appendChild(card);
         });
     }
 
-    // 2. 필터 기능 이벤트 리스너
-    if (filterButton) {
-        filterButton.addEventListener('click', () => {
-            alert("필터 메뉴를 표시합니다.");
-            // 실제로는 드롭다운 메뉴를 토글하는 로직이 들어갑니다.
+    // 검색 실행 함수
+    async function doSearch() {
+        const keyword = searchInput ? searchInput.value.trim() : "";
+
+        try {
+            const res = await fetch(
+                `${API_BASE}/facilities/search?q=` + encodeURIComponent(keyword)
+            );
+            const data = await res.json();
+            renderFacilities(data);
+        } catch (err) {
+            console.error(err);
+            alert("시설 검색 중 오류가 발생했습니다.");
+        }
+    }
+
+    // 버튼 클릭 & 엔터키 검색
+    if (searchButton && searchInput) {
+        searchButton.addEventListener("click", doSearch);
+        searchInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                doSearch();
+            }
         });
     }
-    
-    // 3. 시설 카드 클릭 이벤트 리스너 (예시)
-    document.querySelectorAll('.facility-card').forEach((card, index) => {
-        card.addEventListener('click', () => {
-            alert(`${index + 1}번 시설 상세 정보를 봅니다.`);
-        });
-    });
+
+    // 페이지 처음 로드 시 기본 목록 한 번 가져오기
+    doSearch();
 }
